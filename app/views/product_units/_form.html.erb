@@ -1,0 +1,32 @@
+<%= form_with(model: product_unit, local: true) do |form| %>
+  <% if product_unit.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product_unit.errors.count, "error") %> prohibited this product_unit from being saved:</h2>
+
+      <ul>
+      <% product_unit.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :product_id %>
+    <%= form.text_field :product_id, id: :product_unit_product_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :rfid %>
+    <%= form.text_field :rfid, id: :product_unit_rfid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.number_field :status, id: :product_unit_status %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

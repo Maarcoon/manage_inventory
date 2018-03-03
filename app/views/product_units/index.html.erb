@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Product Units</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Rfid</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @product_units.each do |product_unit| %>
+      <tr>
+        <td><%= product_unit.product %></td>
+        <td><%= product_unit.rfid %></td>
+        <td><%= product_unit.status %></td>
+        <td><%= link_to 'Show', product_unit %></td>
+        <td><%= link_to 'Edit', edit_product_unit_path(product_unit) %></td>
+        <td><%= link_to 'Destroy', product_unit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Product Unit', new_product_unit_path %>
