@@ -7,7 +7,7 @@ module Api
           if params[:tipo] == 'entrada'
             if product = Product.find_by_id(params[:produto])
               params[:rfids].each do |rfid|
-                product.product_unit.create(rfid: rfid)
+                product.product_units.create(rfid: rfid)
               end
             else
               return render json: {status: 'error', message: "Produto com id #{params[:produto]} não encontrado."}
