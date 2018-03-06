@@ -12,4 +12,6 @@
 
 class ProductUnit < ApplicationRecord
   belongs_to :product
+
+  enum status: [ :in_stock, :sold, :lost, :provisory ]
 end
