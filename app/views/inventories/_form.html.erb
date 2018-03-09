@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :closed %>
+    <%= form.label :closed, 'Fechado?' %>
     <%= form.check_box :closed, id: :inventory_closed %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Salvar' %>
   </div>
 <% end %>

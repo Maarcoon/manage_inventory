@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :name, 'Nome' %>
     <%= form.text_field :name, id: :product_name %>
   </div>
 
   <div class="field">
-    <%= form.label :code %>
+    <%= form.label :code, 'Código' %>
     <%= form.text_field :code, id: :product_code %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit 'Salvar' %>
   </div>
 <% end %>
