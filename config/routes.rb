@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :inventories
+  resources :inventories, only: [:index, :show, :create, :destroy]
   resources :product_units
   resources :products
 

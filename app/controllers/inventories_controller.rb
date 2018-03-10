@@ -1,5 +1,5 @@
 class InventoriesController < ApplicationController
-  before_action :set_inventory, only: [:show, :edit, :update, :destroy]
+  before_action :set_inventory, only: [:show, :destroy]
 
   # GET /inventories
   # GET /inventories.json
@@ -12,63 +12,28 @@ class InventoriesController < ApplicationController
   def show
   end
 
-  # GET /inventories/new
-  def new
-    @inventory = Inventory.new
-  end
-
-  # GET /inventories/1/edit
-  def edit
-  end
-
   # POST /inventories
   # POST /inventories.json
   def create
-    @inventory = Inventory.new(inventory_params)
+    @inventory = Inventory.new()
 
-    respond_to do |format|
-      if @inventory.save
-        format.html { redirect_to @inventory, notice: 'Inventory was successfully created.' }
-        format.json { render :show, status: :created, location: @inventory }
-      else
-        format.html { render :new }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /inventories/1
-  # PATCH/PUT /inventories/1.json
-  def update
-    respond_to do |format|
-      if @inventory.update(inventory_params)
-        format.html { redirect_to @inventory, notice: 'Inventory was successfully updated.' }
-        format.json { render :show, status: :ok, location: @inventory }
-      else
-        format.html { render :edit }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
-      end
+    if @inventory.save
+      redirect_to @inventory, notice: 'Inventário iniciado com sucesso.'
+    else
+      redirect_to @inventory, notice: 'Não foi possível iniciar o inventário.'
     end
   end
 
   # DELETE /inventories/1
   # DELETE /inventories/1.json
   def destroy
-    @inventory.destroy
-    respond_to do |format|
-      format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    @inventory.update_attributes(closed_at: Time.now)
+    redirect_to inventories_url, notice: 'O inventário foi fechado com sucesso.'
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_inventory
       @inventory = Inventory.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def inventory_params
-      params.require(:inventory).permit(:closed)
     end
 end

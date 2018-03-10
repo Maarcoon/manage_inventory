@@ -3,8 +3,8 @@
 <table class='table table-hover'>
   <thead>
     <tr>
-      <th>Fechado?</th>
-      <th style='width: 20px;'></th>
+      <th>Data abertura</th>
+      <th>Data fechamento</th>
       <th style='width: 20px;'></th>
       <th style='width: 20px;'></th>
     </tr>
@@ -13,10 +13,14 @@
   <tbody>
     <% @inventories.each do |inventory| %>
       <tr>
-        <td><%= inventory.closed %></td>
+        <td><%= inventory.opened_date %></td>
+        <td><%= inventory.closed_date %></td>
         <td><%= link_to 'Visualizar', inventory %></td>
-        <td><%= link_to 'Alterar', edit_inventory_path(inventory) %></td>
-        <td><%= link_to 'Excluir', inventory, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir?' } %></td>
+        <td>
+          <% if inventory.open? %>
+            <%= link_to 'Fechar', inventory, method: :delete, data: { confirm: 'Você tem certeza que deseja fechar este inventário?' } %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -24,4 +28,4 @@
 
 <br>
 
-<%= link_to 'Novo inventário', new_inventory_path %>
+<%= link_to 'Iniciar novo inventário', inventories_path, method: :post, data: { confirm: 'Você tem certeza que deseja iniciar um novo inventário?' } %>
