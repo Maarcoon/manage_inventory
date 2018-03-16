@@ -15,8 +15,8 @@
   <tbody>
     <% @inventories.each do |inventory| %>
       <tr>
-        <td><%= inventory.opened_date %></td>
-        <td><%= inventory.closed_date %></td>
+        <td><%= l(inventory.created_at, format: :date_short) %></td>
+        <td><%= inventory.closed? ? l(inventory.closed_at, format: :date_short) : 'ABERTO' %></td>
         <td>
           <%= link_to inventory do %>
             <i class='fa fa-eye'></i>

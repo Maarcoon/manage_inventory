@@ -1,0 +1,4 @@
+pt-BR:
+  time:
+    formats:
+      date_short: "%d/%m/%Y"

@@ -53,6 +53,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Central point to collect locale data for use in Ruby on Rails.
+gem 'rails-i18n', '~> 5.1'
+
 group :development, :test do
   # documentation annotate --exclude tests,fixtures,factories,serializers
   gem 'annotate'
