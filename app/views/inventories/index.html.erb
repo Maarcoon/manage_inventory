@@ -7,6 +7,8 @@
     <tr>
       <th>Data abertura</th>
       <th>Data fechamento</th>
+      <th>Itens em estoque</th>
+      <th>Itens faltando</th>
       <th style='width: 20px;'></th>
       <th style='width: 20px;'></th>
     </tr>
@@ -17,6 +19,8 @@
       <tr>
         <td><%= l(inventory.created_at, format: :date_short) %></td>
         <td><%= inventory.closed? ? l(inventory.closed_at, format: :date_short) : 'ABERTO' %></td>
+        <td><%= inventory.inventory_items.count %></td>
+        <td><%= inventory.inventory_items.missing.count %></td>
         <td>
           <%= link_to inventory do %>
             <i class='fa fa-eye'></i>

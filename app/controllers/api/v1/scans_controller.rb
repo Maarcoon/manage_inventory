@@ -13,9 +13,17 @@ module Api
               return render json: {status: 'error', message: "Produto com id #{params[:produto]} não encontrado."}
             end
           elsif params[:tipo] == 'saida'
-            #TODO
+          #TODO
           elsif params[:tipo] == 'inventario'
-            #TODO
+            if params[:rfids].is_a? Array
+              inventory = Inventory.open
+              params[:rfids].each do |rfid|
+                inventory_item = InventoryItem.joins(:product_unit).where(product_units: { rfid: rfid }).first
+                inventory_item.found! if inventory_item
+              end
+            else
+              return render json: {status: 'error', message: "O parametro rfids deve ser uma lista de rfids."}
+            end
           else
             render nothing: true, status: :bad_request
           end
