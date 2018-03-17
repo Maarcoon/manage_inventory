@@ -27,7 +27,7 @@ class InventoriesController < ApplicationController
   # DELETE /inventories/1
   # DELETE /inventories/1.json
   def destroy
-    @inventory.update_attributes(closed_at: Time.now)
+    @inventory.update_attributes(closed_at: Time.now, open: false)
     redirect_to inventories_url, notice: 'O inventário foi fechado com sucesso.'
   end
 
