@@ -19,7 +19,7 @@
       <tr>
         <td><%= product.name %></td>
         <td><%= product.code %></td>
-        <td><%= product.product_units.count %></td>
+        <td><%= product.product_units.in_stock.count %></td>
         <td>
           <%= link_to product do %>
             <i class='fa fa-eye'></i>
