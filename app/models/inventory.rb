@@ -16,6 +16,8 @@ class Inventory < ApplicationRecord
 
   has_many :inventory_items, dependent: :destroy
 
+  validate :only_one_open
+
   after_create :generate_items
 
   def closed?
@@ -33,6 +35,12 @@ class Inventory < ApplicationRecord
   end
 
   private
+
+  def only_one_open
+    if Inventory.where(open: true).any?
+      errors.add(:open, "Apenas 1 inventário pode ser aberto ao mesmo tempo.")
+    end
+  end
 
   def generate_items
     ProductUnit.in_stock.each do |product_unit|

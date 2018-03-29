@@ -15,13 +15,13 @@ class InventoriesController < ApplicationController
   # POST /inventories
   # POST /inventories.json
   def create
-    @inventory = Inventory.new()
-
-    if @inventory.save
-      redirect_to @inventory, notice: 'Inventário iniciado com sucesso.'
+    if Inventory.open.present?
+      @inventory = Inventory.open
     else
-      redirect_to @inventory, notice: 'Não foi possível iniciar o inventário.'
+      @inventory = Inventory.create
     end
+
+    redirect_to @inventory, notice: 'Inventário iniciado com sucesso.'
   end
 
   # DELETE /inventories/1
