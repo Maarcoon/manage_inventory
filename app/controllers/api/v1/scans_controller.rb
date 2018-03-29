@@ -28,7 +28,7 @@ module Api
             if params[:rfids].is_a? Array
               inventory = Inventory.open
               params[:rfids].each do |rfid|
-                inventory_item = InventoryItem.joins(:product_unit).where(product_units: { rfid: rfid }).first
+                inventory_item = Inventory.find_by(open: true).inventory_items.joins(:product_unit).where(product_units: { rfid: rfid }).first
                 inventory_item.found! if inventory_item
               end
             else
