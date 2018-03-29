@@ -14,7 +14,7 @@ class Inventory < ApplicationRecord
   scope :open, -> { find_by_open(true) }
   scope :closed, -> { where(open: false) }
 
-  has_many :inventory_items
+  has_many :inventory_items, dependent: :destroy
 
   after_create :generate_items
 

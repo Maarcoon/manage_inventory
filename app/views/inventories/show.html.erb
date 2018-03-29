@@ -1,1 +1,55 @@
-Inventario bonitinho
+<h1 class='page-header'>
+  Inventário
+  <% if @inventory.inventory_items.missing.any? %>
+    <%= link_to 'Fechar inventário', '#', class: 'btn btn-primary pull-right', disabled: true %>
+  <% else %>
+    <%= link_to 'Fechar inventário', @inventory, method: :delete, data: { confirm: 'Você tem certeza que deseja fechar este inventário?' }, class: 'btn btn-primary pull-right' %>
+  <% end %>
+</h1>
+
+<h4>Produtos faltando <span class="label label-warning"><%= @inventory.inventory_items.missing.count %></span></h4>
+
+<br>
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Tag</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventory.inventory_items.missing.each do |item| %>
+      <tr>
+        <td><%= item.product_unit.product.code %></td>
+        <td><%= item.product_unit.product.name %></td>
+        <td><%= item.product_unit.rfid %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+<h4>Produtos encontrados <span class="label label-info"><%= @inventory.inventory_items.found.count %></span></h4>
+
+<br>
+<table class='table table-hover'>
+  <thead>
+    <tr>
+      <th>Código</th>
+      <th>Nome</th>
+      <th>Tag</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @inventory.inventory_items.found.each do |item| %>
+      <tr>
+        <td><%= item.product_unit.product.code %></td>
+        <td><%= item.product_unit.product.name %></td>
+        <td><%= item.product_unit.rfid %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
