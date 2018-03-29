@@ -11,4 +11,8 @@
 
 class Product < ApplicationRecord
   has_many :product_units
+
+  def code_name
+    "#{code} - #{name}"
+  end
 end
