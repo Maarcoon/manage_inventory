@@ -10,7 +10,7 @@
 #
 
 class Product < ApplicationRecord
-  has_many :product_units
+  has_many :product_units, dependent: :destroy
 
   def code_name
     "#{code} - #{name}"

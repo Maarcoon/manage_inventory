@@ -13,5 +13,7 @@
 class ProductUnit < ApplicationRecord
   belongs_to :product
 
+  has_many :inventory_items, dependent: :destroy
+
   enum status: [ :in_stock, :sold, :lost, :provisory ]
 end
