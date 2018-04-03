@@ -24,7 +24,7 @@ RSpec.describe ProductUnit, type: :model do
     it { should have_many(:inventory_items) }
   end
 
-  describe 'Validations' do
+  describe 'Enums' do
     it { should define_enum_for(:status) }
   end
 
