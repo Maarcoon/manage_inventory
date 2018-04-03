@@ -13,7 +13,7 @@
 FactoryBot.define do
   factory :product_unit do
     product
-    rfid "MyString"
+    rfid "Rfid"
     status 0
   end
 end

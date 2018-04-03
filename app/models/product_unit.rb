@@ -16,4 +16,6 @@ class ProductUnit < ApplicationRecord
   has_many :inventory_items, dependent: :destroy
 
   enum status: [ :in_stock, :sold, :lost, :provisory ]
+
+  validates :product, :rfid, :status, presence: true
 end
