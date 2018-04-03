@@ -5,7 +5,7 @@
 #  id              :integer          not null, primary key
 #  inventory_id    :integer
 #  product_unit_id :integer
-#  status          :integer
+#  status          :integer          default("missing")
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
