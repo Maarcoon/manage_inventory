@@ -1,0 +1,6 @@
+pt-BR:
+  product_unit_status:
+    in_stock: Em estoque
+    sold: Vendido
+    lost: Perdido
+    provisory: Condicional

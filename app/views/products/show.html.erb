@@ -15,7 +15,7 @@
     <% @product.product_units.each do |unit| %>
       <tr>
         <td><%= unit.rfid %></td>
-        <td><span class="label label-<%= unit.in_stock? ? 'info' : 'warning' %>"><%= unit.status %></span></td>
+        <td><span class="label label-<%= unit.in_stock? ? 'info' : 'warning' %>"><%= I18n.t :"product_unit_status.#{unit.status}" %></span></td>
       </tr>
     <% end %>
   </tbody>
