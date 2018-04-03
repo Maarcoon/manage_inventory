@@ -12,5 +12,24 @@
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { FactoryBot.build(:product) }
+
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
+  end
+
+  describe 'Associations' do
+    it { should have_many(:product_units) }
+  end
+
+  describe 'Validations' do
+    it { should validate_presence_of(:name) }
+    it { should validate_presence_of(:code) }
+  end
+
+  describe '#code_name' do
+    it 'concat code with name' do
+      expect(subject.code_name).to eq 'Code - Name'
+    end
+  end
 end

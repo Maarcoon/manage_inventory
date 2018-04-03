@@ -11,7 +11,7 @@
 
 FactoryBot.define do
   factory :product do
-    name "MyString"
-    code "MyString"
+    name "Name"
+    code "Code"
   end
 end

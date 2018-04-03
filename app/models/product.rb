@@ -12,6 +12,8 @@
 class Product < ApplicationRecord
   has_many :product_units, dependent: :destroy
 
+  validates :name, :code, presence: true
+
   def code_name
     "#{code} - #{name}"
   end
