@@ -13,5 +13,24 @@
 require 'rails_helper'
 
 RSpec.describe InventoryItem, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject { FactoryBot.build(:inventory_item) }
+
+  it 'is valid with valid attributes' do
+    expect(subject).to be_valid
+  end
+
+  describe 'Associations' do
+    it { should belong_to(:inventory) }
+    it { should belong_to(:product_unit) }
+  end
+
+  describe 'Enums' do
+    it { should define_enum_for(:status) }
+  end
+
+  describe 'Validations' do
+    it { should validate_presence_of(:inventory) }
+    it { should validate_presence_of(:product_unit) }
+    it { should validate_presence_of(:status) }
+  end
 end

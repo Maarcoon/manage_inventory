@@ -12,8 +12,8 @@
 
 FactoryBot.define do
   factory :inventory_item do
-    inventory nil
-    product_unit nil
+    inventory
+    product_unit
     status 1
   end
 end

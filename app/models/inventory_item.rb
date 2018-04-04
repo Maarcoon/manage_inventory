@@ -15,4 +15,6 @@ class InventoryItem < ApplicationRecord
   belongs_to :product_unit
 
   enum status: [ :missing, :found ]
+
+  validates :inventory, :product_unit, :status, presence: true
 end
