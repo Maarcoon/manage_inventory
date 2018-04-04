@@ -11,6 +11,7 @@
 
 FactoryBot.define do
   factory :inventory do
+    open true
     closed_at nil
   end
 end

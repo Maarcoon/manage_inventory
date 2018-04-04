@@ -26,7 +26,7 @@ module Api
           elsif params[:tipo] == 'inventario'
             # Receives an array of RFIDS and update inventory items in case of item found
             if params[:rfids].is_a? Array
-              inventory = Inventory.open
+              inventory = Inventory.find_by_open(true)
               params[:rfids].each do |rfid|
                 inventory_item = Inventory.find_by(open: true).inventory_items.joins(:product_unit).where(product_units: { rfid: rfid }).first
                 inventory_item.found! if inventory_item

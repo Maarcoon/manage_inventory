@@ -15,8 +15,8 @@ class InventoriesController < ApplicationController
   # POST /inventories
   # POST /inventories.json
   def create
-    if Inventory.open.present?
-      @inventory = Inventory.open
+    if Inventory.find_by_open(true)
+      @inventory = Inventory.find_by_open(true)
     else
       @inventory = Inventory.create
     end

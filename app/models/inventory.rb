@@ -11,12 +11,9 @@
 
 class Inventory < ApplicationRecord
 
-  scope :open, -> { find_by_open(true) }
-  scope :closed, -> { where(open: false) }
-
   has_many :inventory_items, dependent: :destroy
 
-  validate :only_one_open
+  validate :only_one_open, on: :create
 
   after_create :generate_items
 
@@ -37,8 +34,8 @@ class Inventory < ApplicationRecord
   private
 
   def only_one_open
-    if Inventory.where(open: true).any?
-      errors.add(:open, "Apenas 1 inventário pode ser aberto ao mesmo tempo.")
+    if Inventory.find_by_open(true)
+      errors.add(:open, 'Apenas 1 inventário pode ser aberto ao mesmo tempo.')
     end
   end
 
