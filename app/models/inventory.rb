@@ -21,10 +21,6 @@ class Inventory < ApplicationRecord
     !open?
   end
 
-  def opened_date
-    I18n.l(created_at.to_date)
-  end
-
   def closed_date
     if closed_at
       I18n.l(closed_at.to_date)
