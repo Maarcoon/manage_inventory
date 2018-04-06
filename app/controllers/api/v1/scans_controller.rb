@@ -11,7 +11,7 @@ module Api
                 product.product_units.create(rfid: rfid)
               end
             else
-              return render json: {status: 'error', message: "Produto com id #{params[:produto]} não encontrado."}
+              return render json: {status: 'error', message: I18n.t('scan.missing_product', product: params[:produto])}
             end
           elsif params[:tipo] == 'saida'
             # Update product unit status to sold based on rfid read
@@ -21,7 +21,7 @@ module Api
                 product_unit.sold! if product_unit
               end
             else
-              return render json: {status: 'error', message: "O parametro rfids deve ser uma lista de rfids."}
+              return render json: {status: 'error', message: I18n.t('scan.missing_tags')}
             end
           elsif params[:tipo] == 'inventario'
             # Receives an array of RFIDS and update inventory items in case of item found
@@ -32,14 +32,14 @@ module Api
                 inventory_item.found! if inventory_item
               end
             else
-              return render json: {status: 'error', message: "O parametro rfids deve ser uma lista de rfids."}
+              return render json: {status: 'error', message: I18n.t('scan.missing_tags')}
             end
           else
             render nothing: true, status: :bad_request
           end
           render json: {status: 'success'}
         rescue
-          render nothing: true, status: :bad_request
+          render json: {status: 'error', message: I18n.t('scan.exception')}
         end
       end
     end
