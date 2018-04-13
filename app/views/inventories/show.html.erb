@@ -1,10 +1,6 @@
 <h1 class='page-header'>
   Inventário
-  <% if @inventory.inventory_items.missing.any? %>
-    <%= link_to 'Fechar inventário', '#', class: 'btn btn-primary pull-right', disabled: true %>
-  <% else %>
-    <%= link_to 'Fechar inventário', @inventory, method: :delete, data: { confirm: 'Você tem certeza que deseja fechar este inventário?' }, class: 'btn btn-primary pull-right' %>
-  <% end %>
+  <%= link_to 'Fechar inventário', @inventory, method: :delete, data: { confirm: 'Você tem certeza que deseja fechar este inventário?' }, class: 'btn btn-primary pull-right' if @inventory.open? %>
 </h1>
 
 <h4>Produtos faltando <span class="label label-warning"><%= @inventory.inventory_items.missing.count %></span></h4>
@@ -15,7 +11,11 @@
     <tr>
       <th>Código</th>
       <th>Nome</th>
+      <th>Status</th>
       <th>Tag</th>
+      <% if @inventory.open? %>
+        <th style='width: 50px;'></th>
+      <% end %>
     </tr>
   </thead>
 
@@ -24,7 +24,34 @@
       <tr>
         <td><%= item.product_unit.product.code %></td>
         <td><%= item.product_unit.product.name %></td>
+        <td><span class="label label-<%= item.product_unit.in_stock? ? 'info' : 'warning' %>"><%= I18n.t :"product_unit_status.#{item.product_unit.status}" %></span></td>
         <td><%= item.product_unit.rfid %></td>
+        <% if @inventory.open? %>
+          <th>
+            <div class="btn-group">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Movimentar <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to 'Encontrado', inventory_item_path(id: item.id, status: :in_stock), method: :put, data: { confirm: 'Você tem certeza que encontrou este produto?' } %>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <%= link_to 'Vendido', inventory_item_path(id: item.id, status: :sold), method: :put, data: { confirm: 'Você tem certeza que vendeu este produto?' } %>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <%= link_to 'Perdido', inventory_item_path(id: item.id, status: :lost), method: :put, data: { confirm: 'Você tem certeza que perdeu este produto?' } %>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li>
+                  <%= link_to 'Condicional', inventory_item_path(id: item.id, status: :provisory), method: :put, data: { confirm: 'Você tem certeza que esta em condicional?' } %>
+                </li>
+              </ul>
+            </div>
+          </th>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
@@ -39,6 +66,7 @@
     <tr>
       <th>Código</th>
       <th>Nome</th>
+      <th>Status</th>
       <th>Tag</th>
     </tr>
   </thead>
@@ -48,6 +76,7 @@
       <tr>
         <td><%= item.product_unit.product.code %></td>
         <td><%= item.product_unit.product.name %></td>
+        <td><span class="label label-<%= item.product_unit.in_stock? ? 'info' : 'warning' %>"><%= I18n.t :"product_unit_status.#{item.product_unit.status}" %></span>
         <td><%= item.product_unit.rfid %></td>
       </tr>
     <% end %>
