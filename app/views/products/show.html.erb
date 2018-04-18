@@ -1,4 +1,10 @@
-<h1 class='page-header'>Produto: <%= @product.code_name %></h1>
+<h1 class='page-header'>Produto</h1>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <strong><%= @product.code_name %></strong>
+  </div>
+</div>
 
 <h4>Unidades <span class="label label-warning"><%= @product.product_units.count %></span></h4>
 

@@ -4,40 +4,48 @@
 
 <%= link_to 'Novo produto', new_product_path, {remote: true, class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal-window'}} %>
 
-<table class='table table-hover'>
-  <thead>
-    <tr>
-      <th>Nome</th>
-      <th>Código</th>
-      <th>Unidades</th>
-      <th style='width: 15px;'></th>
-      <th style='width: 15px;'></th>
-      <th style='width: 15px;'></th>
-    </tr>
-  </thead>
+<% if @products.any? %>
 
-  <tbody>
-    <% @products.each do |product| %>
+  <table class='table table-hover'>
+    <thead>
       <tr>
-        <td><%= product.name %></td>
-        <td><%= product.code %></td>
-        <td><%= product.product_units.in_stock.count %></td>
-        <td>
-          <%= link_to product do %>
-            <i class='fa fa-eye'></i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to edit_product_path(product), remote: :true, data: {toggle: 'modal', target: '#modal-window'}  do %>
-            <i class='fa fa-pencil'></i>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to product, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir?' } do %>
-            <i class='fa fa-trash'></i>
-          <% end %>
-        </td>
+        <th>Nome</th>
+        <th>Código</th>
+        <th>Unidades</th>
+        <th style='width: 15px;'></th>
+        <th style='width: 15px;'></th>
+        <th style='width: 15px;'></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.name %></td>
+          <td><%= product.code %></td>
+          <td><%= product.product_units.in_stock.count %></td>
+          <td>
+            <%= link_to product do %>
+              <i class='fa fa-eye'></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_product_path(product), remote: :true, data: {toggle: 'modal', target: '#modal-window'}  do %>
+              <i class='fa fa-pencil'></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to product, method: :delete, data: { confirm: 'Você tem certeza que deseja excluir?' } do %>
+              <i class='fa fa-trash'></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+  <h2>Ainda não tens nenhum produto cadastrado.</h2>
+
+<% end %>
