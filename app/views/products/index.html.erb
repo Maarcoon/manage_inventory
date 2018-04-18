@@ -1,6 +1,8 @@
 <h1 class='page-header'>Produtos</h1>
 
-<%= link_to 'Novo produto', new_product_path, {remote: true, class: 'btn btn-primary pull-right', data: {toggle: 'modal', target: '#modal-window'}} %>
+<%= link_to 'Importar produtos', new_import_product_path, {remote: true, class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal-window'}} %>
+
+<%= link_to 'Novo produto', new_product_path, {remote: true, class: 'btn btn-primary', data: {toggle: 'modal', target: '#modal-window'}} %>
 
 <table class='table table-hover'>
   <thead>

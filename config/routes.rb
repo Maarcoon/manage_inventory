@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  resources :inventory_items
   resources :inventories, only: [:index, :show, :create, :destroy]
-  resources :product_units
+  resources :inventory_items, only: [:update]
+
   resources :products
+  resources :import_products, only: [:new, :create]
+  resources :product_units, only: [:destroy]
 
   namespace :api do
     namespace :v1 do
