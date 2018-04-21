@@ -1,5 +1,3 @@
 pt-BR:
   scan:
-    missing_product: 'Produto com id %{product} não encontrado.'
-    missing_tags: 'O parametro rfids deve ser uma lista de rfids.'
-    exception: 'Erro inesperado.'
+    exception: 'Erro inesperado. Verifique os dados e tente novamente.'
